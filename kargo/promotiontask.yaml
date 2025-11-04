@@ -41,12 +41,11 @@ spec:
     as: commit
     config:
       path: ./out
-      message: ${{ task.outputs['update-helm-chart'].commitMessage }}
+      message: |
+        Updated external-secrets
+        ${{ task.outputs['update-helm-chart'].commitMessage }}
+        ${{ task.outputs['update-image-tag'].commitMessage }}
   - uses: git-push
     config:
       path: ./out
-  - uses: argocd-update
-    config:
-      apps:
-      - name: ${{ vars.argocdApp }}
 
