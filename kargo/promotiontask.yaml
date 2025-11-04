@@ -27,14 +27,14 @@ spec:
       path: ./out/${{ vars.envPath }}/kustomization.yaml
       updates:
       - key: helmCharts.0.version
-        value: ${{ imageFrom( vars.image ).Tag }}
+        value: ${{ trimPrefix(imageFrom( vars.image ).Tag, "v") }}
   - uses: yaml-update
     as: update-image-tag
     config:
       path: ./out/${{ vars.envPath }}/kustomization.yaml
       updates:
       - key: images.0.newTag
-        value: v${{ imageFrom( vars.image ).Tag }}
+        value: ${{ imageFrom( vars.image ).Tag }}
   - uses: git-commit
     as: commit
     config:
