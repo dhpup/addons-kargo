@@ -19,8 +19,6 @@ spec:
     config:
       repoURL: ${{ vars.repoURL }}
       checkout:
-      - commit: ${{ commitFrom( vars.repoURL ).ID }}
-        path: ./src
       - branch: ${{ vars.branch }}
         path: ./out
   - uses: yaml-update
